@@ -1,11 +1,20 @@
+<script setup>
+import { useAppStore } from './stores/app'
+import DebugTool from './components/DebugTool.vue'
+const appStore = useAppStore()
+</script>
+
 <template>
   <div>
+    <DebugTool />
     <router-link to="/">Home</router-link>|
     <router-link to="/about">About</router-link>
     <router-view v-slot="{ Component }">
-      <Suspense>
-        <component :is="Component" />
-      </Suspense>
+      <suspense>
+        <template #default>
+          <component :is="Component" />
+        </template>
+      </suspense>
     </router-view>
   </div>
 </template>
